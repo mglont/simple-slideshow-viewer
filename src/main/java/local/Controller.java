@@ -94,6 +94,7 @@ public class Controller {
             slideshowService.start();
         } else {
             slideshowService.cancel();
+            slideshowService.reset();
         }
         slideshowMode = slideshowMode.toggle();
         slideshowBtn.setText(slideshowMode.getToggleActionText());

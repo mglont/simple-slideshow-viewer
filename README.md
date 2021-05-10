@@ -1,6 +1,8 @@
 # Simplistic Slideshow Viewer
 
-## TODO
+## Changelog
+* reset `slideshowService` between executions
+
 
 ## Future work 
 * **implement slideshow pause and restart**
