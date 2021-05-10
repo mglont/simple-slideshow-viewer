@@ -1,12 +1,9 @@
 # Simplistic Slideshow Viewer
 
 ## TODO
-* slideshow
-    * scheduled executor
-    * start, pause, resume, restart
-* code cleanup
 
 ## Future work 
+* **implement slideshow pause and restart**
 * Memory/Performance improvements: currently all folder images are stored in memory, but it would 
   make sense to switch to lazy loading and file system caching. 
 * Use [WatchService](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/nio/file/WatchService.html)
