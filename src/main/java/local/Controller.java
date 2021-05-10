@@ -77,7 +77,7 @@ public class Controller {
     }
 
     private ImageView renderImagePage(Integer page) {
-        if (pages.isDisabled()) return null;
+        if (pages.isDisabled() || photos.isEmpty()) return null;
         NamedImage namedImage = photos.get(page);
         var view = new ImageView(namedImage.getImage());
         view.getStyleClass().add("photo");
@@ -92,17 +92,30 @@ public class Controller {
     public void handleSlideshowAction(ActionEvent event) {
         if (slideshowMode.isStart()) {
             slideshowService.start();
+            toggleSlideshowMode();
         } else {
-            slideshowService.cancel();
-            slideshowService.reset();
+            cancelSlideshow();
         }
-        slideshowMode = slideshowMode.toggle();
+    }
+
+    private void cancelSlideshow() {
+        slideshowService.cancel();
+        slideshowService.reset();
+        updateSlideshowMode(SlideshowMode.START);
+    }
+
+    private void toggleSlideshowMode() {
+        updateSlideshowMode(slideshowMode.toggle());
+    }
+
+    private void updateSlideshowMode(SlideshowMode mode) {
+        slideshowMode = mode;
         slideshowBtn.setText(slideshowMode.getToggleActionText());
     }
 
     @FXML
     public void openButtonClicked(ActionEvent event) {
-
+        cancelSlideshow();
         var selected = folderChooser.showDialogue(primaryStage);
         if (null == selected) {
             log.debug("Folder selection cancelled");

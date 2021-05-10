@@ -1,8 +1,8 @@
 # Simplistic Slideshow Viewer
 
 ## Changelog
+* terminate the slideshow when the file chooser is opened
 * reset `slideshowService` between executions
-
 
 ## Future work 
 * **implement slideshow pause and restart**
