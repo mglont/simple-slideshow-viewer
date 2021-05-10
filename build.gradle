@@ -1,0 +1,72 @@
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+    id "io.freefair.lombok" version "6.0.0-m2"
+
+    // id 'org.openjfx.javafxplugin' version '0.0.9' // doesn't work with Gradle7: https://github.com/openjfx/javafx-gradle-plugin/issues/89
+    id "com.dua3.javafxgradle7plugin" version "0.0.9"
+
+    id 'jacoco'
+    id 'com.github.spotbugs' version '4.6.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group = 'local'
+version = '0.0.1-SNAPSHOT'
+description = 'A basic JavaFX-based photo viewer'
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
+    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
+    testImplementation 'org.assertj:assertj-core:3.19.0'
+
+    testImplementation 'org.mockito:mockito-core:3.9.0'
+    testImplementation 'org.mockito:mockito-inline:3.9.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.9.0'
+}
+
+application {
+    mainModule = 'local.simpleSlideshowViewer'
+    mainClass = 'local.Main'
+    applicationDefaultJvmArgs = ['-XX:+FlightRecorder',
+        '-XX:StartFlightRecording=duration=200s,settings=profile,filename=profileInfo.jfr']
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
+javafx {
+    version = "11"
+    modules = [ 'javafx.controls', 'javafx.fxml'  ]
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+
+spotbugs {
+    toolVersion = '4.2.3'
+    //onlyAnalyze = [ 'demo.LFU', 'demo.LFUTests' ]
+}

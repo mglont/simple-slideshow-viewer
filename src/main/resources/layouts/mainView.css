@@ -1,0 +1,29 @@
+#centrePane {
+    -fx-background-image: url('denise-jans-tV80374iytg-unsplash.jpg' );
+    -fx-background-repeat: no-repeat;
+    -fx-background-radius: 10;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-insets: 5;
+    -fx-effect: dropshadow(gaussian, rgba(128,128,128,0.3) , 20, 0.3, 10, 10);
+}
+
+.button {
+    -fx-padding: 10;
+    -fx-background-color: #e01149;
+}
+
+.pagination .pagination-control .left-arrow, .right-arrow {
+    -fx-background-color: #e06d8c;
+}
+
+.progress-bar {
+    -fx-background-color: #e01149;
+    -fx-progress-color: #e06d8c;
+}
+
+#slideShowBtn {
+    -fx-background-color: #CC33CC;
+    -fx-color: #CCCCCC;
+    -fx-background-radius: 5;
+}
